@@ -1,27 +1,28 @@
-extends layout
 
 block content
-  h1 Update Soccer Players Form | Integrating With HubSpot I Practicum
+  .container
+    .form-container
+      h1 Update Soccer Players Form | Integrating With HubSpot I Practicum
 
-  // Form for updating custom object
-  form(action="/update-cobj", method="post")
-    label(for="Name") name:
-    input(type="text", id="name", name="name")
-    br
+      // Form for updating custom object
+      form(action="/update-cobj", method="post")
+        .form-group
+          label(for="name") Name:
+          input(type="text", id="name", name="name", class="form-control", placeholder="Enter player's name")
+        
+        .form-group
+          label(for="field_number") Field Number:
+          input(type="text", id="field_number", name="field_number", class="form-control", placeholder="Enter player's field number")
+        
+        .form-group
+          label(for="team") Team:
+          input(type="text", id="team", name="team", class="form-control", placeholder="Enter player's team")
+        
+        .form-group
+          label(for="shooting_foot") Shooting Foot:
+          input(type="text", id="shooting_foot", name="shooting_foot", class="form-control", placeholder="Enter player's preferred shooting foot")
+        
+        button.btn.btn-primary(type="submit") Submit
 
-    label(for="Field Number") Field Number:
-    input(type="text", id="field_number", name="field_number")
-    br
-
-    label(for="Team") Team:
-    input(type="text", id="team", name="team")
-    br
-
-    label(for="Shooting Foot") Shooting Foot:
-    input(type="text", id="shooting_foot", name="shooting_foot")
-    br
-
-    button(type="submit") Submit
-
-  // Link to return to homepage
-  a(href="/") Return to the homepage
+    // Link to return to homepage
+    a.btn.btn-secondary(href="/") Return to the homepage
