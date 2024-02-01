@@ -1,0 +1,27 @@
+extends layout
+
+block content
+  h1 Update Soccer Players Form | Integrating With HubSpot I Practicum
+
+  // Form for updating custom object
+  form(action="/update-cobj", method="post")
+    label(for="Name") name:
+    input(type="text", id="name", name="name")
+    br
+
+    label(for="Field Number") Field Number:
+    input(type="text", id="field_number", name="field_number")
+    br
+
+    label(for="Team") Team:
+    input(type="text", id="team", name="team")
+    br
+
+    label(for="Shooting Foot") Shooting Foot:
+    input(type="text", id="shooting_foot", name="shooting_foot")
+    br
+
+    button(type="submit") Submit
+
+  // Link to return to homepage
+  a(href="/") Return to the homepage
