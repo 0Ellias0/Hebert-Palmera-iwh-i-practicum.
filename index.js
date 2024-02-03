@@ -26,6 +26,44 @@ app.get('/update-cobj', (req,res) => {
 
 // * Code for Route 3 goes here
 
+app.post('/update-cobj', async(req, res) =>{
+
+    // Extract form data submitted by the user
+    const { name, field_number, team, shooting_foot } = req.body;
+
+    // Prepare the data to be sent to HubSpot
+    const PlayerObjectData = {
+        properties: {
+            name,
+            field_number,
+            team,
+            shooting_foot
+        }
+    };
+
+    //API endpoint 
+    const apiUrl = 'https://api.hubspot.com/crm/v3/objects/custom-object-type-id';
+
+    //API access token 
+    const headers = {
+        Authorization: 'Bearer ${process.env.PRIVATE_APP_ACCESS}',
+        'Content-Type': 'application/json'
+    };
+
+    try {
+        // POST request to create a new record in HubSpot 
+        await axios.post(apiUrl, PlayerObjectData, { headers });
+
+        // Redirect back to the homepage after successful POST request
+        res.redirect('/');
+
+    } catch(error){
+
+        console.error('Error creating record in HubSpot: ', error.response.data);
+        res.status(500).send('Error creating record. Please try again later. ')
+    }
+});
+
 /** 
 * * This is sample code to give you a reference for how you should structure your calls. 
 
