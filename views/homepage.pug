@@ -1,33 +1,30 @@
-
-
 block content
-  h1 CRM Record Data | Integrating With HubSpot
+  h1(style="text-align: center; margin-bottom: 20px;") CRM Record Data | Integrating With HubSpot
 
-  p
-    a(href="/update-cobj") Add/Update this table
+  // Add/Update this table hyperlink
+  p(style="text-align: center; margin-bottom: 20px;")
+    a(href="/update-cobj", style="text-decoration: none; color: #007bff; font-weight: bold;") Add/Update this table
 
-  if data && data.results.length > 0
-    table
-      thead
+  // Style for table
+  table(style="width: 100%; border-collapse: collapse; border: 1px solid #ddd;")
+
+    // Table header
+    thead
+      tr(style="background-color: #f2f2f2;")
+        th(style="padding: 10px; text-align: left; border: 1px solid #ddd;") Name
+        th(style="padding: 10px; text-align: left; border: 1px solid #ddd;") Field Number
+        th(style="padding: 10px; text-align: left; border: 1px solid #ddd;") Team
+        th(style="padding: 10px; text-align: left; border: 1px solid #ddd;") Shooting Foot
+
+    // Table body
+    tbody
+      each record in data.results
         tr
-          th Name
-          th Field Number
-          th Team
-          th Shooting Foot
-      tbody
-        each record in data.results
-          tr
-            td= record.properties.name 
-            td= record.properties.field_number
-            td= record.properties.Team
-            td= record.properties.shooting_foot
-  else
-    p No CRM record data available.
+          td(style="padding: 10px; border: 1px solid #ddd;")= record.properties.name ? record.properties.name : 'N/A'
+          td(style="padding: 10px; border: 1px solid #ddd;")= record.properties.field_number ? record.properties.field_number : 'N/A'
+          td(style="padding: 10px; border: 1px solid #ddd;")= record.properties.team ? record.properties.team : 'N/A'
+          td(style="padding: 10px; border: 1px solid #ddd;")= record.properties.shooting_foot ? record.properties.shooting_foot : 'N/A'
 
-//- //- Helper function to get property value from properties array
-//- mixin getProperty(properties, propertyName)
-//-   - var property = properties.find(prop => prop.name === propertyName)
-//-   if property
-//-     = property.value
-//-   else
-//-     | N/A
+      if data && data.results.length === 0
+        tr
+          td(colspan="4", style="padding: 10px; text-align: center; border: 1px solid #ddd;") No CRM record data available.

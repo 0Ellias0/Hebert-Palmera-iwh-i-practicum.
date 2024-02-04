@@ -28,8 +28,7 @@ app.get('/', async (req,res) => {
     try {
         const customProperties = ['name', 'field_number', 'team', 'shooting_foot'];
 
-        // Construct the property query string
-        const propertyQueryString = customProperties.map(prop => `&property=${prop}`).join('');
+
 
         // Construct the API endpoint URL with the property query string
         const apiUrl = `https://api.hubspot.com/crm/v3/objects/${OBJECT_TYPE_ID}?properties=name,team,field_number,shooting_foot`;
@@ -77,13 +76,6 @@ app.post('/update-cobj', async(req, res) =>{
     //API endpoint 
     const apiUrl = `https://api.hubspot.com/crm/v3/objects/${OBJECT_TYPE_ID}`;
 
-    //API access token 
-    const headers = {
-        Authorization: `Bearer ${PRIVATE_APP_ACCESS}`,
-        'Content-Type': 'application/json'
-    };
-
-    // console.log('Resquest headers:', headers);
 
     try {
         // POST request to create a new record in HubSpot 
@@ -99,49 +91,7 @@ app.post('/update-cobj', async(req, res) =>{
     }
 });
 
-/** 
-* * This is sample code to give you a reference for how you should structure your calls. 
 
-* * App.get sample
-app.get('/contacts', async (req, res) => {
-    const contacts = 'https://api.hubspot.com/crm/v3/objects/contacts';
-    const headers = {
-        Authorization: `Bearer ${PRIVATE_APP_ACCESS}`,
-        'Content-Type': 'application/json'
-    }
-    try {
-        const resp = await axios.get(contacts, { headers });
-        const data = resp.data.results;
-        res.render('contacts', { title: 'Contacts | HubSpot APIs', data });      
-    } catch (error) {
-        console.error(error);
-    }
-});
-
-* * App.post sample
-app.post('/update', async (req, res) => {
-    const update = {
-        properties: {
-            "favorite_book": req.body.newVal
-        }
-    }
-
-    const email = req.query.email;
-    const updateContact = `https://api.hubapi.com/crm/v3/objects/contacts/${email}?idProperty=email`;
-    const headers = {
-        Authorization: `Bearer ${PRIVATE_APP_ACCESS}`,
-        'Content-Type': 'application/json'
-    };
-
-    try { 
-        await axios.patch(updateContact, update, { headers } );
-        res.redirect('back');
-    } catch(err) {
-        console.error(err);
-    }
-
-});
-*/
 
 
 // * Localhost

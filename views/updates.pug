@@ -1,22 +1,23 @@
 block content
-  .form-wrapper
-    h1 Update Soccer Players Form | Integrating With HubSpot I Practicum
+  .form-wrapper(style="max-width: 768px; margin: 2rem auto; padding: 2rem; border: solid 1px lightgrey; border-radius: 15px; box-shadow: 3px 2px 6px lightgrey;")
+
+    h1(style="margin-bottom: 20px;") Update Soccer Players Form | Integrating With HubSpot I Practicum
 
     // Form for updating custom object
     form(action="/update-cobj", method="post")
-      .form-group
+      .form-group(style="margin-bottom: 20px;")
         label(for="name") Name:
         input(type="text", id="name", name="name", class="form-control", placeholder="Enter player's name")
       
-      .form-group
+      .form-group(style="margin-bottom: 20px;")
         label(for="field_number") Field Number:
         input(type="text", id="field_number", name="field_number", class="form-control", placeholder="Enter player's field number")
       
-      .form-group
+      .form-group(style="margin-bottom: 20px;")
         label(for="team") Team:
         input(type="text", id="team", name="team", class="form-control", placeholder="Enter player's team")
       
-      .form-group
+      .form-group(style="margin-bottom: 20px;")
         label(for="shooting_foot") Shooting Foot:
         select(id="shooting_foot", name="shooting_foot", class="form-control")
           option(value="Right Foot") Right Foot
@@ -25,4 +26,4 @@ block content
       button.btn.btn-primary(type="submit") Submit
 
   // Link to return to homepage
-  a.btn.btn-secondary(href="/") Return to the homepage
+  a.btn.btn-secondary(href="/", style="display: block; margin-top: 20px;") Return to the homepage
