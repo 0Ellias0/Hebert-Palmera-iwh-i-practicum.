@@ -1,0 +1,33 @@
+
+
+block content
+  h1 CRM Record Data | Integrating With HubSpot
+
+  p
+    a(href="/update-cobj") Add/Update this table
+
+  if data && data.results.length > 0
+    table
+      thead
+        tr
+          th Name
+          th Field Number
+          th Team
+          th Shooting Foot
+      tbody
+        each record in data.results
+          tr
+            td= record.properties.name 
+            td= record.properties.field_number
+            td= record.properties.Team
+            td= record.properties.shooting_foot
+  else
+    p No CRM record data available.
+
+//- //- Helper function to get property value from properties array
+//- mixin getProperty(properties, propertyName)
+//-   - var property = properties.find(prop => prop.name === propertyName)
+//-   if property
+//-     = property.value
+//-   else
+//-     | N/A

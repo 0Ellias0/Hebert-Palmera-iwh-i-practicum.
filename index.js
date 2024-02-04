@@ -1,9 +1,7 @@
-
 require('dotenv').config();
 const express = require('express');
 const axios = require('axios');
 const app = express();
-
 
 
 
@@ -16,9 +14,38 @@ app.use(express.json());
 const PRIVATE_APP_ACCESS = process.env.PRIVATE_APP_ACCESS;
 const OBJECT_TYPE_ID = process.env.OBJECT_TYPE_ID;
 
+
+const headers = {
+    Authorization: `Bearer ${PRIVATE_APP_ACCESS}`,
+    'Content-Type': 'application/json'
+};
+
 // TODO: ROUTE 1 - Create a new app.get route for the homepage to call your custom object data. Pass this data along to the front-end and create a new pug template in the views folder.
 
 // * Code for Route 1 goes here
+app.get('/', async (req,res) => {
+
+    try {
+        const customProperties = ['name', 'field_number', 'team', 'shooting_foot'];
+
+        // Construct the property query string
+        const propertyQueryString = customProperties.map(prop => `&property=${prop}`).join('');
+
+        // Construct the API endpoint URL with the property query string
+        const apiUrl = `https://api.hubspot.com/crm/v3/objects/${OBJECT_TYPE_ID}?properties=name,team,field_number,shooting_foot`;
+            //API access token 
+        const response = await axios.get(apiUrl, { headers });
+        const data = response.data.results;
+        console.log('CRM Record Data:', data);
+        
+        res.render('homepage', { title: 'Homepage | Integration With Hubspot', data: response.data });
+        
+    } catch (error) {
+        console.error('Error retrieving records from HubSpot ', error.response.data);
+        res.status(500).send('Error retrieving records from HubSpot. Please try again later');
+    }
+});
+
 
 // TODO: ROUTE 2 - Create a new app.get route for the form to create or update new custom object data. Send this data along in the next route.
 
